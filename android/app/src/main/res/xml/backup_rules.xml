@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and lower: defines which files are included in Auto Backup -->
+<full-backup-content>
+    <!-- Include the entire databases directory (SQLite) -->
+    <include domain="database" path="."/>
+    <!-- Include shared preferences -->
+    <include domain="sharedpref" path="."/>
+</full-backup-content>

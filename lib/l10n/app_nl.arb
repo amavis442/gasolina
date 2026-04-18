@@ -1,0 +1,68 @@
+{
+  "@@locale": "nl",
+
+  "navEntries": "Tankbeurten",
+  "navPrice": "Prijs",
+  "navEfficiency": "Efficiëntie",
+
+  "screenFuelEntries": "Tankbeurten",
+  "screenPriceChart": "Prijs per Liter Grafiek",
+  "screenEfficiencyChart": "Efficiëntie Grafiek",
+  "screenAddEntry": "Tankbeurt Toevoegen",
+  "screenEditEntry": "Tankbeurt Bewerken",
+
+  "labelDate": "Datum",
+  "labelLiters": "Liters",
+  "labelKilometers": "Kilometers",
+  "labelTotalCost": "Totale Kosten (€)",
+  "hintLiters": "Voer liters in",
+  "hintKilometers": "Voer gereden kilometers in",
+  "hintTotalCost": "Voer totale kosten in",
+
+  "btnAddEntry": "Toevoegen",
+  "btnUpdateEntry": "Bijwerken",
+  "btnDelete": "Verwijderen",
+  "btnCancel": "Annuleren",
+  "btnRetry": "Opnieuw",
+
+  "validationDateRequired": "Selecteer een datum",
+  "validationDateFuture": "Datum mag niet in de toekomst liggen",
+  "validationLitersRequired": "Liters moet groter zijn dan 0",
+  "validationLitersMax": "Liters mag niet meer dan {max} zijn",
+  "validationKilometersRequired": "Kilometers moet groter zijn dan 0",
+  "validationKilometersMax": "Kilometers mag niet meer dan {max} zijn",
+  "validationTotalCostRequired": "Totale kosten moet groter zijn dan 0",
+
+  "warningPriceSuspicious": "Prijs per liter lijkt verdacht (€{price}/L)",
+  "warningEfficiencySuspicious": "Efficiëntie lijkt verdacht ({efficiency} km/L)",
+
+  "dialogDeleteTitle": "Tankbeurt Verwijderen",
+  "dialogDeleteMessage": "Weet je zeker dat je deze tankbeurt wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+
+  "emptyNoEntries": "Nog geen tankbeurten",
+  "emptyNoEntriesHint": "Tik op de + knop om je eerste tankbeurt toe te voegen",
+  "emptyNotEnoughData": "Niet genoeg gegevens",
+  "emptyNotEnoughDataHint": "Voeg ten minste 2 tankbeurten toe om de grafiek te zien",
+
+  "snackbarEntryAdded": "Tankbeurt succesvol toegevoegd",
+  "snackbarEntryUpdated": "Tankbeurt succesvol bijgewerkt",
+  "snackbarEntryDeleted": "Tankbeurt verwijderd",
+
+  "cardLabelLiters": "Liters",
+  "cardLabelDistance": "Afstand",
+  "cardLabelTotalCost": "Totale Kosten",
+  "cardLabelEfficiency": "Efficiëntie",
+  "cardLabelPricePerLiter": "Prijs/L: {price}",
+
+  "tooltipDeleteEntry": "Tankbeurt verwijderen",
+
+  "chartLabelPricePerLiter": "Prijs/Liter",
+  "chartLabelEfficiency": "Efficiëntie",
+  "chartLabelDate": "Datum",
+  "chartStatMin": "Min",
+  "chartStatMax": "Max",
+  "chartStatAvg": "Gem",
+  "chartStatEntries": "Tankbeurten",
+
+  "errorGeneric": "Fout: {error}"
+}

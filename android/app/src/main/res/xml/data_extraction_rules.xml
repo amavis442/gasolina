@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+: defines cloud backup and device transfer rules -->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Include the entire databases directory (SQLite) -->
+        <include domain="database" path="."/>
+        <!-- Include shared preferences -->
+        <include domain="sharedpref" path="."/>
+    </cloud-backup>
+    <device-transfer>
+        <!-- Also include data when transferring to a new device -->
+        <include domain="database" path="."/>
+        <include domain="sharedpref" path="."/>
+    </device-transfer>
+</data-extraction-rules>

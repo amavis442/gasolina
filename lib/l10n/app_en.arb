@@ -1,0 +1,254 @@
+{
+  "@@locale": "en",
+
+  "navEntries": "Entries",
+  "@navEntries": {
+    "description": "Bottom navigation label for fuel entries tab"
+  },
+  "navPrice": "Price",
+  "@navPrice": {
+    "description": "Bottom navigation label for price chart tab"
+  },
+  "navEfficiency": "Efficiency",
+  "@navEfficiency": {
+    "description": "Bottom navigation label for efficiency chart tab"
+  },
+
+  "screenFuelEntries": "Fuel Entries",
+  "@screenFuelEntries": {
+    "description": "Title for fuel entries list screen"
+  },
+  "screenPriceChart": "Price per Liter Chart",
+  "@screenPriceChart": {
+    "description": "Title for price chart screen"
+  },
+  "screenEfficiencyChart": "Efficiency Chart",
+  "@screenEfficiencyChart": {
+    "description": "Title for efficiency chart screen"
+  },
+  "screenAddEntry": "Add Fuel Entry",
+  "@screenAddEntry": {
+    "description": "Title for add fuel entry form screen"
+  },
+  "screenEditEntry": "Edit Fuel Entry",
+  "@screenEditEntry": {
+    "description": "Title for edit fuel entry form screen"
+  },
+
+  "labelDate": "Date",
+  "@labelDate": {
+    "description": "Label for date input field"
+  },
+  "labelLiters": "Liters",
+  "@labelLiters": {
+    "description": "Label for liters input field"
+  },
+  "labelKilometers": "Kilometers",
+  "@labelKilometers": {
+    "description": "Label for kilometers input field"
+  },
+  "labelTotalCost": "Total Cost (€)",
+  "@labelTotalCost": {
+    "description": "Label for total cost input field"
+  },
+  "hintLiters": "Enter liters",
+  "@hintLiters": {
+    "description": "Hint text for liters input field"
+  },
+  "hintKilometers": "Enter kilometers driven",
+  "@hintKilometers": {
+    "description": "Hint text for kilometers input field"
+  },
+  "hintTotalCost": "Enter total cost",
+  "@hintTotalCost": {
+    "description": "Hint text for total cost input field"
+  },
+
+  "btnAddEntry": "Add Entry",
+  "@btnAddEntry": {
+    "description": "Button label for adding a new fuel entry"
+  },
+  "btnUpdateEntry": "Update Entry",
+  "@btnUpdateEntry": {
+    "description": "Button label for updating existing fuel entry"
+  },
+  "btnDelete": "Delete",
+  "@btnDelete": {
+    "description": "Button label for delete action"
+  },
+  "btnCancel": "Cancel",
+  "@btnCancel": {
+    "description": "Button label for cancel action"
+  },
+  "btnRetry": "Retry",
+  "@btnRetry": {
+    "description": "Button label for retry action"
+  },
+
+  "validationDateRequired": "Please select a date",
+  "@validationDateRequired": {
+    "description": "Validation error when date is not selected"
+  },
+  "validationDateFuture": "Date cannot be in the future",
+  "@validationDateFuture": {
+    "description": "Validation error when selected date is in the future"
+  },
+  "validationLitersRequired": "Liters must be greater than 0",
+  "@validationLitersRequired": {
+    "description": "Validation error when liters value is invalid"
+  },
+  "validationLitersMax": "Liters cannot exceed {max}",
+  "@validationLitersMax": {
+    "description": "Validation error when liters exceed maximum",
+    "placeholders": {
+      "max": {
+        "type": "double"
+      }
+    }
+  },
+  "validationKilometersRequired": "Kilometers must be greater than 0",
+  "@validationKilometersRequired": {
+    "description": "Validation error when kilometers value is invalid"
+  },
+  "validationKilometersMax": "Kilometers cannot exceed {max}",
+  "@validationKilometersMax": {
+    "description": "Validation error when kilometers exceed maximum",
+    "placeholders": {
+      "max": {
+        "type": "double"
+      }
+    }
+  },
+  "validationTotalCostRequired": "Total cost must be greater than 0",
+  "@validationTotalCostRequired": {
+    "description": "Validation error when total cost value is invalid"
+  },
+
+  "warningPriceSuspicious": "Price per liter seems suspicious (€{price}/L)",
+  "@warningPriceSuspicious": {
+    "description": "Warning when price per liter is outside normal range",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "warningEfficiencySuspicious": "Efficiency seems suspicious ({efficiency} km/L)",
+  "@warningEfficiencySuspicious": {
+    "description": "Warning when efficiency is outside normal range",
+    "placeholders": {
+      "efficiency": {
+        "type": "String"
+      }
+    }
+  },
+
+  "dialogDeleteTitle": "Delete Entry",
+  "@dialogDeleteTitle": {
+    "description": "Title for delete confirmation dialog"
+  },
+  "dialogDeleteMessage": "Are you sure you want to delete this fuel entry? This action cannot be undone.",
+  "@dialogDeleteMessage": {
+    "description": "Message for delete confirmation dialog"
+  },
+
+  "emptyNoEntries": "No fuel entries yet",
+  "@emptyNoEntries": {
+    "description": "Empty state message when no fuel entries exist"
+  },
+  "emptyNoEntriesHint": "Tap the + button to add your first entry",
+  "@emptyNoEntriesHint": {
+    "description": "Empty state hint for adding first entry"
+  },
+  "emptyNotEnoughData": "Not enough data",
+  "@emptyNotEnoughData": {
+    "description": "Empty state message when insufficient data for chart"
+  },
+  "emptyNotEnoughDataHint": "Add at least 2 fuel entries to see the chart",
+  "@emptyNotEnoughDataHint": {
+    "description": "Empty state hint for chart minimum data requirement"
+  },
+
+  "snackbarEntryAdded": "Entry added successfully",
+  "@snackbarEntryAdded": {
+    "description": "Success message when fuel entry is added"
+  },
+  "snackbarEntryUpdated": "Entry updated successfully",
+  "@snackbarEntryUpdated": {
+    "description": "Success message when fuel entry is updated"
+  },
+  "snackbarEntryDeleted": "Entry deleted",
+  "@snackbarEntryDeleted": {
+    "description": "Success message when fuel entry is deleted"
+  },
+
+  "cardLabelLiters": "Liters",
+  "@cardLabelLiters": {
+    "description": "Card label for liters value"
+  },
+  "cardLabelDistance": "Distance",
+  "@cardLabelDistance": {
+    "description": "Card label for distance/kilometers value"
+  },
+  "cardLabelTotalCost": "Total Cost",
+  "@cardLabelTotalCost": {
+    "description": "Card label for total cost value"
+  },
+  "cardLabelEfficiency": "Efficiency",
+  "@cardLabelEfficiency": {
+    "description": "Card label for efficiency value"
+  },
+  "cardLabelPricePerLiter": "Price/L: {price}",
+  "@cardLabelPricePerLiter": {
+    "description": "Card label for price per liter",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+
+  "tooltipDeleteEntry": "Delete entry",
+  "@tooltipDeleteEntry": {
+    "description": "Tooltip for delete entry button"
+  },
+
+  "chartLabelPricePerLiter": "Price/Liter",
+  "@chartLabelPricePerLiter": {
+    "description": "Chart axis label for price per liter"
+  },
+  "chartLabelEfficiency": "Efficiency",
+  "@chartLabelEfficiency": {
+    "description": "Chart axis label for efficiency"
+  },
+  "chartLabelDate": "Date",
+  "@chartLabelDate": {
+    "description": "Chart axis label for date"
+  },
+  "chartStatMin": "Min",
+  "@chartStatMin": {
+    "description": "Chart statistics label for minimum value"
+  },
+  "chartStatMax": "Max",
+  "@chartStatMax": {
+    "description": "Chart statistics label for maximum value"
+  },
+  "chartStatAvg": "Avg",
+  "@chartStatAvg": {
+    "description": "Chart statistics label for average value"
+  },
+  "chartStatEntries": "Entries",
+  "@chartStatEntries": {
+    "description": "Chart statistics label for number of entries"
+  },
+
+  "errorGeneric": "Error: {error}",
+  "@errorGeneric": {
+    "description": "Generic error message template",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
+}
