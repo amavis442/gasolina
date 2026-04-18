@@ -11,7 +11,7 @@ A Flutter application for tracking fuel consumption with clean architecture, TDD
 - ✅ **Efficiency Chart**: Track fuel efficiency (km/L) trends
 - ✅ **Clean Architecture**: Separation of concerns with domain, data, and presentation layers
 - ✅ **State Management**: Riverpod for reactive state management
-- ✅ **Comprehensive Testing**: 69 passing unit tests
+- ✅ **Comprehensive Testing**: 75 passing unit tests
 
 ## Architecture
 
@@ -52,53 +52,53 @@ flutter analyze
 
 ## Release Builds & Deploying to Device
 
-### Eerste keer instellen (eenmalig)
+### First-time setup (once only)
 
-De release keystore staat **niet** in git. Je hebt nodig:
-- `android/app/gasolina.keystore` — de keystore file
-- `android/key.properties` — wachtwoorden
+The release keystore is **not** in git. You need:
+- `android/app/gasolina.keystore` — the keystore file
+- `android/key.properties` — passwords
 
-Zorg dat `android/key.properties` er zo uitziet:
+Make sure `android/key.properties` looks like this:
 
 ```properties
-storePassword=<wachtwoord>
-keyPassword=<wachtwoord>
+storePassword=<password>
+keyPassword=<password>
 keyAlias=gasolina
 storeFile=gasolina.keystore
 ```
 
-> De keystore en wachtwoorden staan in de wachtwoordmanager onder **Gasolina release keystore**.
+> The keystore and passwords are stored in the password manager under **Gasolina release keystore**.
 
-### APK bouwen
+### Building the APK
 
 ```bash
 flutter build apk --release
 ```
 
-De APK staat daarna op:
+The APK is then located at:
 ```
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
-### Installeren op telefoon (zonder dataverlies)
+### Installing on device (without data loss)
 
-> ⚠️ **Gebruik NOOIT `flutter install --release`** — de Flutter CLI voert altijd eerst `adb uninstall` uit, waardoor alle app-data gewist wordt (SQLite database, instellingen). Dit is een bekend Flutter-bug (GitHub issue [#96588](https://github.com/flutter/flutter/issues/96588)).
+> ⚠️ **NEVER use `flutter install --release`** — the Flutter CLI always runs `adb uninstall` first, which wipes all app data (SQLite database, settings). This is a known Flutter bug (GitHub issue [#96588](https://github.com/flutter/flutter/issues/96588)).
 
-Gebruik in plaats daarvan altijd `adb install -r` direct:
+Always use `adb install -r` directly instead:
 
 ```bash
 adb install -r build/app/outputs/flutter-apk/app-release.apk
 ```
 
-De `-r` flag vervangt de APK in-place zonder de app eerst te verwijderen — data blijft bewaard.
+The `-r` flag replaces the APK in-place without uninstalling first — data is preserved.
 
-> **Nooit** de app handmatig verwijderen voor het installeren, want dan ben je alle data kwijt.
+> **Never** manually uninstall the app before installing, as this will delete all data.
 
-### Android Auto Backup (extra veiligheid)
+### Android Auto Backup (extra safety)
 
-De app is geconfigureerd met Android Auto Backup (`android:allowBackup="true"`). Android back-upt de SQLite database automatisch naar Google Drive (max 25 MB, end-to-end versleuteld). Bij een herinstallatie wordt de data automatisch teruggezet.
+The app is configured with Android Auto Backup (`android:allowBackup="true"`). Android automatically backs up the SQLite database to Google Drive (max 25 MB, end-to-end encrypted). Data is automatically restored on reinstall.
 
-### Snelle update in één commando
+### Quick update in one command
 
 ```bash
 flutter build apk --release && adb install -r build/app/outputs/flutter-apk/app-release.apk
