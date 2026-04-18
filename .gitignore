@@ -1,6 +1,13 @@
 # Claude Code local config
 .claude/
 
+# Unused platform targets (Android-only app)
+ios/
+linux/
+macos/
+web/
+windows/
+
 # Miscellaneous
 *.class
 *.log
