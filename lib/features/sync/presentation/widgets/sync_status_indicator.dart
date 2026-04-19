@@ -28,15 +28,10 @@ class _SyncStatusIndicatorState extends ConsumerState<SyncStatusIndicator> {
               backgroundColor: Theme.of(context).colorScheme.error,
               behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
-                label: 'Retry',
+                label: 'Dismiss',
                 textColor: Theme.of(context).colorScheme.onError,
-                onPressed: () {
-                  ref.read(syncConfigProvider).whenData((config) {
-                    ref
-                        .read(syncStateProvider.notifier)
-                        .triggerSync(config);
-                  });
-                },
+                onPressed: () =>
+                    ref.read(syncStateProvider.notifier).reset(),
               ),
             ),
           );

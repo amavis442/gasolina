@@ -72,6 +72,8 @@ class SyncStateNotifier extends StateNotifier<AsyncValue<DateTime?>> {
     required this.ref,
   }) : super(const AsyncValue.data(null));
 
+  void reset() => state = const AsyncValue.data(null);
+
   Future<void> triggerSync(SyncConfig config) async {
     if (!config.isConfigured) return;
     state = const AsyncValue.loading();
