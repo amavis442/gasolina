@@ -69,7 +69,7 @@ class SyncEntryDto {
   FuelEntryModel toModel() {
     return FuelEntryModel(
       id: id,
-      date: fuelledAt,
+      date: fuelledAt.toLocal(),
       liters: liters,
       kilometers: kilometers,
       totalCost: totalCost,

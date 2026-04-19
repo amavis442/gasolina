@@ -57,16 +57,19 @@ final syncStateProvider =
   return SyncStateNotifier(
     syncUseCase: ref.watch(syncUseCaseProvider),
     configDataSource: ref.watch(syncConfigDataSourceProvider),
+    ref: ref,
   );
 });
 
 class SyncStateNotifier extends StateNotifier<AsyncValue<DateTime?>> {
   final SyncFuelEntries syncUseCase;
   final SyncConfigDataSource configDataSource;
+  final Ref ref;
 
   SyncStateNotifier({
     required this.syncUseCase,
     required this.configDataSource,
+    required this.ref,
   }) : super(const AsyncValue.data(null));
 
   Future<void> triggerSync(SyncConfig config) async {
@@ -75,7 +78,10 @@ class SyncStateNotifier extends StateNotifier<AsyncValue<DateTime?>> {
     final result = await syncUseCase(config);
     result.fold(
       (failure) => state = AsyncValue.error(failure.message, StackTrace.current),
-      (_) => state = AsyncValue.data(DateTime.now()),
+      (_) {
+        ref.read(fuelEntriesProvider.notifier).loadEntries();
+        state = AsyncValue.data(DateTime.now());
+      },
     );
   }
 }
