@@ -199,4 +199,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get displayPreferences => 'Display preferences';
+
+  @override
+  String get syncSettingsSaved => 'Sync settings saved';
 }

@@ -201,4 +201,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get displayPreferences => 'Weergavevoorkeuren';
+
+  @override
+  String get syncSettingsSaved => 'Sync Instellingen opgeslagen';
 }

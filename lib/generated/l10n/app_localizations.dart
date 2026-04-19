@@ -451,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Display preferences'**
   String get displayPreferences;
+
+  /// Sync settings saved
+  ///
+  /// In en, this message translates to:
+  /// **'Sync settings saved'**
+  String get syncSettingsSaved;
 }
 
 class _AppLocalizationsDelegate

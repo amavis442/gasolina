@@ -286,6 +286,11 @@
   "displayPreferences": "Display preferences",
   "@displayPreferences": {
     "description": "Display preferences"
+  },
+
+  "syncSettingsSaved": "Sync settings saved",
+  "@syncSettingsSaved": {
+    "description": "Sync settings saved"
   }
 
 }

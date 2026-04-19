@@ -59,6 +59,7 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
     setState(() => _saving = true);
 
     final config = SyncConfig(
@@ -73,7 +74,7 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
       setState(() => _saving = false);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Sync settings saved')));
+      ).showSnackBar(SnackBar(content: Text(l10n.syncSettingsSaved)));
     }
   }
 

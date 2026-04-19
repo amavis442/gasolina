@@ -78,5 +78,7 @@
 
   "save": "Opslaan",
 
-  "displayPreferences": "Weergavevoorkeuren"
+  "displayPreferences": "Weergavevoorkeuren",
+
+  "syncSettingsSaved": "Sync Instellingen opgelagen"
 }
