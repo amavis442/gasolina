@@ -1,4 +1,4 @@
-// ABOUTME: Screen displaying fuel entries grouped by month and year with add/edit/delete actions
+// ABOUTME: Screen displaying fuel entries grouped by calendar month or wage period (25th–24th)
 // ABOUTME: Uses Riverpod for state management and navigation to form screen
 
 import 'package:flutter/material.dart';
@@ -8,13 +8,24 @@ import '../providers/fuel_entry_providers.dart';
 import 'fuel_entry_form_screen.dart';
 import '../widgets/fuel_entry_card.dart';
 import '../../../../generated/l10n/app_localizations.dart';
+import '../../../../core/utils/wage_period.dart';
 import 'package:intl/intl.dart';
 
-class FuelEntryListScreen extends ConsumerWidget {
+enum _PeriodMode { calendar, wage }
+
+class FuelEntryListScreen extends ConsumerStatefulWidget {
   const FuelEntryListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FuelEntryListScreen> createState() =>
+      _FuelEntryListScreenState();
+}
+
+class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
+  _PeriodMode _mode = _PeriodMode.calendar;
+
+  @override
+  Widget build(BuildContext context) {
     final entriesAsync = ref.watch(fuelEntriesProvider);
     final l10n = AppLocalizations.of(context);
 
@@ -53,30 +64,59 @@ class FuelEntryListScreen extends ConsumerWidget {
             );
           }
 
-          final items = _buildGroupedList(entries);
+          final items = _mode == _PeriodMode.calendar
+              ? _buildCalendarGroupedList(entries)
+              : _buildWageGroupedList(entries);
 
-          return ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              return switch (item) {
-                _MonthGroupHeader() => _MonthHeaderWidget(header: item),
-                _EntryListItem() => FuelEntryCard(
-                    entry: item.entry,
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              FuelEntryFormScreen(entry: item.entry),
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+                child: SegmentedButton<_PeriodMode>(
+                  segments: const [
+                    ButtonSegment(
+                      value: _PeriodMode.calendar,
+                      icon: Icon(Icons.calendar_month_outlined),
+                      label: Text('Monthly'),
+                    ),
+                    ButtonSegment(
+                      value: _PeriodMode.wage,
+                      icon: Icon(Icons.payments_outlined),
+                      label: Text('Wage period'),
+                    ),
+                  ],
+                  selected: {_mode},
+                  onSelectionChanged: (s) =>
+                      setState(() => _mode = s.first),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    return switch (item) {
+                      _PeriodHeader() =>
+                        _PeriodHeaderWidget(header: item),
+                      _EntryListItem() => FuelEntryCard(
+                          entry: item.entry,
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    FuelEntryFormScreen(entry: item.entry),
+                              ),
+                            );
+                          },
+                          onDelete: () => _showDeleteConfirmation(
+                              context, ref, item.entry.id),
                         ),
-                      );
-                    },
-                    onDelete: () =>
-                        _showDeleteConfirmation(context, ref, item.entry.id),
-                  ),
-              };
-            },
+                    };
+                  },
+                ),
+              ),
+            ],
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -152,7 +192,7 @@ class FuelEntryListScreen extends ConsumerWidget {
 
 // ── Grouping logic ────────────────────────────────────────────────────────────
 
-List<_ListItem> _buildGroupedList(List<FuelEntry> entries) {
+List<_ListItem> _buildCalendarGroupedList(List<FuelEntry> entries) {
   final sorted = [...entries]..sort((a, b) => b.date.compareTo(a.date));
 
   final Map<(int, int), List<FuelEntry>> groups = {};
@@ -161,8 +201,6 @@ List<_ListItem> _buildGroupedList(List<FuelEntry> entries) {
     groups.putIfAbsent(key, () => []).add(entry);
   }
 
-  // Keys are already in descending order because entries are sorted, but sort
-  // explicitly to be safe.
   final sortedKeys = groups.keys.toList()
     ..sort((a, b) {
       if (a.$1 != b.$1) return b.$1.compareTo(a.$1);
@@ -172,12 +210,36 @@ List<_ListItem> _buildGroupedList(List<FuelEntry> entries) {
   final items = <_ListItem>[];
   for (final key in sortedKeys) {
     final monthEntries = groups[key]!;
-    items.add(_MonthGroupHeader(
-      year: key.$1,
-      month: key.$2,
+    items.add(_PeriodHeader(
+      label: DateFormat('MMMM yyyy').format(DateTime(key.$1, key.$2)),
+      icon: Icons.calendar_month_outlined,
       entries: monthEntries,
     ));
     items.addAll(monthEntries.map(_EntryListItem.new));
+  }
+  return items;
+}
+
+List<_ListItem> _buildWageGroupedList(List<FuelEntry> entries) {
+  final sorted = [...entries]..sort((a, b) => b.date.compareTo(a.date));
+
+  final Map<DateTime, List<FuelEntry>> groups = {};
+  for (final entry in sorted) {
+    final key = wagePeriodStart(entry.date);
+    groups.putIfAbsent(key, () => []).add(entry);
+  }
+
+  final sortedKeys = groups.keys.toList()..sort((a, b) => b.compareTo(a));
+
+  final items = <_ListItem>[];
+  for (final key in sortedKeys) {
+    final periodEntries = groups[key]!;
+    items.add(_PeriodHeader(
+      label: wagePeriodLabel(key),
+      icon: Icons.payments_outlined,
+      entries: periodEntries,
+    ));
+    items.addAll(periodEntries.map(_EntryListItem.new));
   }
   return items;
 }
@@ -186,14 +248,14 @@ List<_ListItem> _buildGroupedList(List<FuelEntry> entries) {
 
 sealed class _ListItem {}
 
-class _MonthGroupHeader extends _ListItem {
-  final int year;
-  final int month;
+class _PeriodHeader extends _ListItem {
+  final String label;
+  final IconData icon;
   final List<FuelEntry> entries;
 
-  _MonthGroupHeader({
-    required this.year,
-    required this.month,
+  _PeriodHeader({
+    required this.label,
+    required this.icon,
     required this.entries,
   });
 
@@ -206,21 +268,18 @@ class _EntryListItem extends _ListItem {
   _EntryListItem(this.entry);
 }
 
-// ── Month header widget ───────────────────────────────────────────────────────
+// ── Period header widget ──────────────────────────────────────────────────────
 
-class _MonthHeaderWidget extends StatelessWidget {
-  final _MonthGroupHeader header;
+class _PeriodHeaderWidget extends StatelessWidget {
+  final _PeriodHeader header;
 
-  const _MonthHeaderWidget({required this.header});
+  const _PeriodHeaderWidget({required this.header});
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    final monthLabel = DateFormat('MMMM yyyy').format(
-      DateTime(header.year, header.month),
-    );
     final litersLabel = NumberFormat('#0.0').format(header.totalLiters);
     final costLabel =
         NumberFormat.currency(symbol: '€').format(header.totalCost);
@@ -234,13 +293,13 @@ class _MonthHeaderWidget extends StatelessWidget {
           Row(
             children: [
               Icon(
-                Icons.calendar_month_outlined,
+                header.icon,
                 size: 18,
                 color: colorScheme.primary,
               ),
               const SizedBox(width: 8),
               Text(
-                monthLabel,
+                header.label,
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
