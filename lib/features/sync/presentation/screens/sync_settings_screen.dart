@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../features/fuel_entries/presentation/providers/wage_day_provider.dart';
 import '../../domain/entities/sync_config.dart';
 import '../providers/sync_providers.dart';
 import 'qr_scanner_screen.dart';
@@ -121,6 +122,36 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
                       tooltip: 'Scan QR code',
                       onPressed: _scanQr,
                     ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              const Divider(),
+              const SizedBox(height: 16),
+              Text(
+                'Display preferences',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text('Wage day'),
+                  ),
+                  DropdownButton<int>(
+                    value: ref.watch(wageDayProvider),
+                    items: List.generate(
+                      28,
+                      (i) => DropdownMenuItem(
+                        value: i + 1,
+                        child: Text('${i + 1}'),
+                      ),
+                    ),
+                    onChanged: (day) {
+                      if (day != null) {
+                        ref.read(wageDayProvider.notifier).setWageDay(day);
+                      }
+                    },
                   ),
                 ],
               ),

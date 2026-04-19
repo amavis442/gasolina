@@ -4,7 +4,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/providers/shared_preferences_provider.dart';
 import '../../../../features/fuel_entries/presentation/providers/fuel_entry_providers.dart';
 import '../../data/datasources/sync_config_datasource.dart';
 import '../../data/datasources/sync_remote_datasource.dart';
@@ -12,9 +12,8 @@ import '../../data/repositories/sync_repository_impl.dart';
 import '../../domain/entities/sync_config.dart';
 import '../../domain/usecases/sync_fuel_entries.dart';
 
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('sharedPreferencesProvider must be overridden in main');
-});
+export '../../../../core/providers/shared_preferences_provider.dart'
+    show sharedPreferencesProvider;
 
 final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
   return const FlutterSecureStorage();

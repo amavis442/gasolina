@@ -13,6 +13,7 @@ import 'features/fuel_entries/presentation/screens/fuel_entry_list_screen.dart';
 import 'features/splash/presentation/screens/splash_screen.dart';
 import 'features/statistics/presentation/screens/efficiency_chart_screen.dart';
 import 'features/statistics/presentation/screens/price_chart_screen.dart';
+import 'core/providers/shared_preferences_provider.dart';
 import 'features/sync/presentation/providers/sync_providers.dart';
 import 'features/sync/presentation/screens/sync_settings_screen.dart';
 import 'features/sync/presentation/widgets/sync_status_indicator.dart';

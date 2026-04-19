@@ -9,6 +9,7 @@ import 'fuel_entry_form_screen.dart';
 import '../widgets/fuel_entry_card.dart';
 import '../../../../generated/l10n/app_localizations.dart';
 import '../../../../core/utils/wage_period.dart';
+import '../providers/wage_day_provider.dart';
 import 'package:intl/intl.dart';
 
 enum _PeriodMode { calendar, wage }
@@ -64,9 +65,10 @@ class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
             );
           }
 
+          final wageDay = ref.watch(wageDayProvider);
           final items = _mode == _PeriodMode.calendar
               ? _buildCalendarGroupedList(entries)
-              : _buildWageGroupedList(entries);
+              : _buildWageGroupedList(entries, wageDay);
 
           return Column(
             children: [
@@ -220,12 +222,12 @@ List<_ListItem> _buildCalendarGroupedList(List<FuelEntry> entries) {
   return items;
 }
 
-List<_ListItem> _buildWageGroupedList(List<FuelEntry> entries) {
+List<_ListItem> _buildWageGroupedList(List<FuelEntry> entries, int wageDay) {
   final sorted = [...entries]..sort((a, b) => b.date.compareTo(a.date));
 
   final Map<DateTime, List<FuelEntry>> groups = {};
   for (final entry in sorted) {
-    final key = wagePeriodStart(entry.date);
+    final key = wagePeriodStart(entry.date, wageDay);
     groups.putIfAbsent(key, () => []).add(entry);
   }
 
@@ -235,7 +237,7 @@ List<_ListItem> _buildWageGroupedList(List<FuelEntry> entries) {
   for (final key in sortedKeys) {
     final periodEntries = groups[key]!;
     items.add(_PeriodHeader(
-      label: wagePeriodLabel(key),
+      label: wagePeriodLabel(key, wageDay),
       icon: Icons.payments_outlined,
       entries: periodEntries,
     ));
