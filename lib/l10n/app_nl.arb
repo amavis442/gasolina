@@ -25,6 +25,7 @@
   "btnCancel": "Annuleren",
   "btnRetry": "Opnieuw",
 
+  "validationRequired": "Verplicht",
   "validationDateRequired": "Selecteer een datum",
   "validationDateFuture": "Datum mag niet in de toekomst liggen",
   "validationLitersRequired": "Liters moet groter zijn dan 0",
@@ -64,5 +65,18 @@
   "chartStatAvg": "Gem",
   "chartStatEntries": "Tankbeurten",
 
-  "errorGeneric": "Fout: {error}"
+  "errorGeneric": "Fout: {error}",
+
+
+  "monthly": "Maandelijks",
+  
+  "wagePeriod": "Loon periode",
+
+  "syncSettings": "Sync Instellingen",
+      
+  "wageDay": "Loondag",
+
+  "save": "Opslaan",
+
+  "displayPreferences": "Weergavevoorkeuren"
 }

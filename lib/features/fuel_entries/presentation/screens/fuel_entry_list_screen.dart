@@ -31,9 +31,7 @@ class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
     final l10n = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.screenFuelEntries),
-      ),
+      appBar: AppBar(title: Text(l10n.screenFuelEntries)),
       body: entriesAsync.when(
         data: (entries) {
           if (entries.isEmpty) {
@@ -50,15 +48,15 @@ class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
                   Text(
                     l10n.emptyNoEntries,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
+                      color: Colors.grey.shade600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     l10n.emptyNoEntriesHint,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey.shade500,
-                        ),
+                      color: Colors.grey.shade500,
+                    ),
                   ),
                 ],
               ),
@@ -75,21 +73,20 @@ class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                 child: SegmentedButton<_PeriodMode>(
-                  segments: const [
+                  segments: [
                     ButtonSegment(
                       value: _PeriodMode.calendar,
                       icon: Icon(Icons.calendar_month_outlined),
-                      label: Text('Monthly'),
+                      label: Text(l10n.monthly),
                     ),
                     ButtonSegment(
                       value: _PeriodMode.wage,
                       icon: Icon(Icons.payments_outlined),
-                      label: Text('Wage period'),
+                      label: Text(l10n.wagePeriod),
                     ),
                   ],
                   selected: {_mode},
-                  onSelectionChanged: (s) =>
-                      setState(() => _mode = s.first),
+                  onSelectionChanged: (s) => setState(() => _mode = s.first),
                 ),
               ),
               Expanded(
@@ -98,22 +95,24 @@ class _FuelEntryListScreenState extends ConsumerState<FuelEntryListScreen> {
                   itemBuilder: (context, index) {
                     final item = items[index];
                     return switch (item) {
-                      _PeriodHeader() =>
-                        _PeriodHeaderWidget(header: item),
+                      _PeriodHeader() => _PeriodHeaderWidget(header: item),
                       _EntryListItem() => FuelEntryCard(
-                          entry: item.entry,
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    FuelEntryFormScreen(entry: item.entry),
-                              ),
-                            );
-                          },
-                          onDelete: () => _showDeleteConfirmation(
-                              context, ref, item.entry.id),
+                        entry: item.entry,
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  FuelEntryFormScreen(entry: item.entry),
+                            ),
+                          );
+                        },
+                        onDelete: () => _showDeleteConfirmation(
+                          context,
+                          ref,
+                          item.entry.id,
                         ),
+                      ),
                     };
                   },
                 ),
@@ -212,11 +211,13 @@ List<_ListItem> _buildCalendarGroupedList(List<FuelEntry> entries) {
   final items = <_ListItem>[];
   for (final key in sortedKeys) {
     final monthEntries = groups[key]!;
-    items.add(_PeriodHeader(
-      label: DateFormat('MMMM yyyy').format(DateTime(key.$1, key.$2)),
-      icon: Icons.calendar_month_outlined,
-      entries: monthEntries,
-    ));
+    items.add(
+      _PeriodHeader(
+        label: DateFormat('MMMM yyyy').format(DateTime(key.$1, key.$2)),
+        icon: Icons.calendar_month_outlined,
+        entries: monthEntries,
+      ),
+    );
     items.addAll(monthEntries.map(_EntryListItem.new));
   }
   return items;
@@ -236,11 +237,13 @@ List<_ListItem> _buildWageGroupedList(List<FuelEntry> entries, int wageDay) {
   final items = <_ListItem>[];
   for (final key in sortedKeys) {
     final periodEntries = groups[key]!;
-    items.add(_PeriodHeader(
-      label: wagePeriodLabel(key, wageDay),
-      icon: Icons.payments_outlined,
-      entries: periodEntries,
-    ));
+    items.add(
+      _PeriodHeader(
+        label: wagePeriodLabel(key, wageDay),
+        icon: Icons.payments_outlined,
+        entries: periodEntries,
+      ),
+    );
     items.addAll(periodEntries.map(_EntryListItem.new));
   }
   return items;
@@ -283,8 +286,9 @@ class _PeriodHeaderWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final litersLabel = NumberFormat('#0.0').format(header.totalLiters);
-    final costLabel =
-        NumberFormat.currency(symbol: '€').format(header.totalCost);
+    final costLabel = NumberFormat.currency(
+      symbol: '€',
+    ).format(header.totalCost);
     final count = header.entries.length;
 
     return Padding(
@@ -294,11 +298,7 @@ class _PeriodHeaderWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                header.icon,
-                size: 18,
-                color: colorScheme.primary,
-              ),
+              Icon(header.icon, size: 18, color: colorScheme.primary),
               const SizedBox(width: 8),
               Text(
                 header.label,
@@ -320,11 +320,7 @@ class _PeriodHeaderWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Divider(
-            height: 1,
-            thickness: 1,
-            color: colorScheme.outlineVariant,
-          ),
+          Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
         ],
       ),
     );

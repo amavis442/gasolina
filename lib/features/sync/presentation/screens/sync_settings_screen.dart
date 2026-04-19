@@ -7,6 +7,7 @@ import '../../../../features/fuel_entries/presentation/providers/wage_day_provid
 import '../../domain/entities/sync_config.dart';
 import '../providers/sync_providers.dart';
 import 'qr_scanner_screen.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 class SyncSettingsScreen extends ConsumerStatefulWidget {
   const SyncSettingsScreen({super.key});
@@ -48,9 +49,9 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
   }
 
   Future<void> _scanQr() async {
-    final result = await Navigator.of(context).push<String>(
-      MaterialPageRoute(builder: (_) => const QrScannerScreen()),
-    );
+    final result = await Navigator.of(
+      context,
+    ).push<String>(MaterialPageRoute(builder: (_) => const QrScannerScreen()));
     if (result != null && result.isNotEmpty) {
       _secretController.text = result;
     }
@@ -70,16 +71,18 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
 
     if (mounted) {
       setState(() => _saving = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sync settings saved')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Sync settings saved')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Sync Settings')),
+      appBar: AppBar(title: Text(l10n.syncSettings)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -95,8 +98,9 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
                 ),
                 keyboardType: TextInputType.url,
                 autocorrect: false,
-                validator: (v) =>
-                    (v == null || v.trim().isEmpty) ? 'Required' : null,
+                validator: (v) => (v == null || v.trim().isEmpty)
+                    ? l10n.validationRequired
+                    : null,
               ),
               const SizedBox(height: 16),
               Row(
@@ -110,8 +114,9 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
                       ),
                       obscureText: true,
                       autocorrect: false,
-                      validator: (v) =>
-                          (v == null || v.trim().isEmpty) ? 'Required' : null,
+                      validator: (v) => (v == null || v.trim().isEmpty)
+                          ? l10n.validationRequired
+                          : null,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -129,15 +134,13 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
               const Divider(),
               const SizedBox(height: 16),
               Text(
-                'Display preferences',
+                l10n.displayPreferences,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               const SizedBox(height: 12),
               Row(
                 children: [
-                  const Expanded(
-                    child: Text('Wage day'),
-                  ),
+                  Expanded(child: Text(l10n.wageDay)),
                   DropdownButton<int>(
                     value: ref.watch(wageDayProvider),
                     items: List.generate(
@@ -164,7 +167,7 @@ class _SyncSettingsScreenState extends ConsumerState<SyncSettingsScreen> {
                         width: 18,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('Save'),
+                    : Text(l10n.save),
               ),
             ],
           ),

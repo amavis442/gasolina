@@ -218,6 +218,12 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get btnRetry;
 
+  /// Validation error when no input
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get validationRequired;
+
   /// Validation error when date is not selected
   ///
   /// In en, this message translates to:
@@ -409,6 +415,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error: {error}'**
   String errorGeneric(String error);
+
+  /// Monthly period selection
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// WagePeriod period selection
+  ///
+  /// In en, this message translates to:
+  /// **'Wage period'**
+  String get wagePeriod;
+
+  /// Sync settings for the api
+  ///
+  /// In en, this message translates to:
+  /// **'Sync Settings'**
+  String get syncSettings;
+
+  /// On which day are the wages paid
+  ///
+  /// In en, this message translates to:
+  /// **'Wage day'**
+  String get wageDay;
+
+  /// Save data
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Display preferences
+  ///
+  /// In en, this message translates to:
+  /// **'Display preferences'**
+  String get displayPreferences;
 }
 
 class _AppLocalizationsDelegate

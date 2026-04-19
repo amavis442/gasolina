@@ -69,6 +69,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get btnRetry => 'Opnieuw';
 
   @override
+  String get validationRequired => 'Verplicht';
+
+  @override
   String get validationDateRequired => 'Selecteer een datum';
 
   @override
@@ -180,4 +183,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String errorGeneric(String error) {
     return 'Fout: $error';
   }
+
+  @override
+  String get monthly => 'Maandelijks';
+
+  @override
+  String get wagePeriod => 'Loon periode';
+
+  @override
+  String get syncSettings => 'Sync Instellingen';
+
+  @override
+  String get wageDay => 'Loondag';
+
+  @override
+  String get save => 'Opslaan';
+
+  @override
+  String get displayPreferences => 'Weergavevoorkeuren';
 }

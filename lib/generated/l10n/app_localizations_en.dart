@@ -69,6 +69,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get btnRetry => 'Retry';
 
   @override
+  String get validationRequired => 'Required';
+
+  @override
   String get validationDateRequired => 'Please select a date';
 
   @override
@@ -178,4 +181,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String errorGeneric(String error) {
     return 'Error: $error';
   }
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get wagePeriod => 'Wage period';
+
+  @override
+  String get syncSettings => 'Sync Settings';
+
+  @override
+  String get wageDay => 'Wage day';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get displayPreferences => 'Display preferences';
 }

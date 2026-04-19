@@ -85,6 +85,11 @@
     "description": "Button label for retry action"
   },
 
+  "validationRequired": "Required",
+  "@validationRequired": {
+    "description": "Validation error when no input"
+  },
+
   "validationDateRequired": "Please select a date",
   "@validationDateRequired": {
     "description": "Validation error when date is not selected"
@@ -250,5 +255,37 @@
         "type": "String"
       }
     }
+  },
+
+  "monthly": "Monthly",
+  "@monthly": {
+    "description": "Monthly period selection"
+  },
+
+  "wagePeriod": "Wage period",
+  "@wagePeriod": {
+    "description": "WagePeriod period selection"
+  },
+
+  "syncSettings": "Sync Settings",
+  "@syncSettings": {
+    "description": "Sync settings for the api"
+  },
+
+  "wageDay": "Wage day",
+  "@wageDay": {
+    "description": "On which day are the wages paid"
+  },
+
+
+  "save": "Save",
+  "@save": {
+    "description": "Save data"
+  },
+
+  "displayPreferences": "Display preferences",
+  "@displayPreferences": {
+    "description": "Display preferences"
   }
+
 }
